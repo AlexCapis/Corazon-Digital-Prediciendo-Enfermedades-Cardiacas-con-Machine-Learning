@@ -22,8 +22,7 @@ def evaluation():
         model = pickle.load(file)
 
 
-
-    # Calcular el MSE en el conjunto de prueba
+    # Calculo del MSE en el conjunto de prueba
     mse = mean_squared_error(y_test, y_pred)
     print(f"MSE: {mse}")
 

@@ -13,13 +13,13 @@ def train_linear_regression_model():
     file_path = os.path.join(current_dir, '..', 'data', 'processed', 'processed.csv')
     df = pd.read_csv(file_path)
 
-    # Eliminar filas con valores faltantes en las características y la variable objetivo
+    # Eliminación de filas con valores faltantes en las características y la variable objetivo
     df.dropna(subset=['SMA 15', 'SMA 60', 'MSD 10', 'MSD 30', 'rsi', 'returns'], inplace=True)
 
-    # Columnas de características
+    # Columnas de características (features)
     features = df[['SMA 15', 'SMA 60', 'MSD 10', 'MSD 30', 'rsi']]
 
-    # Variable objetivo
+    # Variable objetivo (target)
     target = df['returns']
 
     # División en conjuntos de entrenamiento y prueba
@@ -29,11 +29,11 @@ def train_linear_regression_model():
     train_dir = os.path.join(current_dir, '..', 'data', 'train')
     test_dir = os.path.join(current_dir, '..', 'data', 'test')
 
-    # Crear directorios de salida si no existen
+    # Creación directorios de salida si no existen
     os.makedirs(train_dir, exist_ok=True)
     os.makedirs(test_dir, exist_ok=True)
 
-    # Guardar conjunto de entrenamiento en archivo CSV
+    # Guardado del conjunto de entrenamiento en archivo CSV
     train_file = os.path.join(train_dir, 'train.csv')
     train_data = pd.concat([X_train, y_train], axis=1)
     train_data.to_csv(train_file, index=False)
@@ -43,24 +43,25 @@ def train_linear_regression_model():
     test_data = pd.concat([X_test, y_test], axis=1)
     test_data.to_csv(test_file, index=False)
 
-    # Resto del código para la regresión lineal
+    # La regresión lineal
     reg = LinearRegression()
     reg.fit(X_train, y_train)
 
     # Predicciones en el conjunto de prueba
     y_pred = reg.predict(X_test)
 
-    # Calcular el MSE en el conjunto de prueba
+    # Calculo del MSE en el conjunto de prueba
     mse = mean_squared_error(y_test, y_pred)
-    print(f"MSE: {mse}")
+    mse_percentage = mse * 100
+    print(f"MSE (porcentaje): {mse_percentage}")
 
     # Directorio del archivo de modelos
     models_dir = os.path.join(current_dir, '..', 'models')
 
-    # Crear el directorio "models" si no existe
+    # Creación el directorio "models" si no existe
     os.makedirs(models_dir, exist_ok=True)
 
-    # Guardar las predicciones en formato pickle
+    # Guardado las predicciones en formato pickle
     predictions_path = os.path.join(models_dir, 'trained_model.pkl')
     with open(predictions_path, 'wb') as file:
         pickle.dump(y_pred, file)
