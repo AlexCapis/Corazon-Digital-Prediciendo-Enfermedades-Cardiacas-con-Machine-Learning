@@ -21,4 +21,6 @@ def create_dataframe(symbol):
     
     return df
 
+ # Preguntar al usuario que acción desea visualizar,
+ # le ofreceríamos una lista, ya que se necesita una nomenclatura especial mediante acrónimos
 df= create_dataframe("GOOG")

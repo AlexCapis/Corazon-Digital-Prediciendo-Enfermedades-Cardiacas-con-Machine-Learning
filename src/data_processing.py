@@ -4,7 +4,7 @@ import ta
 
 def preprocessing_1():
     # Ruta del archivo CSV en el directorio 'data/raw'
-    csv_path = os.path.join('..', 'data', 'raw', 'GOOG.csv')
+    csv_path = os.path.join('..', 'data', 'raw', 'GOOG.csv') # poner root_dir = os.path.abspath(os.path.join(current_dir, '..'))
 
     # Lecura del archivo CSV en un DataFrame
     df = pd.read_csv(csv_path)
