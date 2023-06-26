@@ -144,62 +144,11 @@ A continuación, se muestra una breve descripción con el significado de cada va
     <summary>Ver imagen</summary>
     <img src="./img/encoding.png" alt="drawing" width="400"/>
     </details>
-    - Usar la librería [`chardet`](https://pypi.org/project/chardet/) para saber el encoding adecuado del archivo.
+    - Usar la librería [`chardet`]().
 
 - **Elección del modelo adecuado**: Se debe seleccionar y ajustar cuidadosamente el modelo de aprendizaje automático más adecuado para el problema. Requiere experimentación y comparación de modelos para encontrar el más efectivo.
 
 - **Interpretación de resultados**: Comprender y comunicar los resultados del modelo de manera efectiva puede ser un desafío. Se necesita interpretar los hallazgos y explicar las predicciones de forma comprensible para diferentes audiencias.
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### ¿Cuántos DataFrames hay que cargar? train/test
-Simplemente, dos opciones:
-
-- **Todo el dataset junto**: necesitas un conjunto de test. Verás en el apartado <a href="#split_train_test">donde se divide en train y test</a> cómo hacer esta división.
-
-- **Train/test por separado**: si tu conjunto de test no está etiquetado (tipico submission file de Kaggle), tendrás que proceder como en el punto anterior. En caso contrario ya tendrás definido tu conjunto de test, y el de train será el set de datos utilizados para el *cross validation* de los modelos.
-
-#### Join de datos
-No siempre tenemos los datos en un único dataframe, por lo que habrá que unir varios conjuntos de tal manera que haya una columna identificadora única para cada fila, con sus features y target asociados. **¿Cómo procedemos?**
-
-1. **Identifica las claves de cruce**: Cuando juntas dos tablas necesitas al menos una columna en común en ambas, por ejemplo un id de cliente. Para que si en una tabla tienes datos de pedidos y en otra datos personales del cliente, mediante su id, podrás juntar toda esa información en una misma tabla.
-2. **Escoge todas las columnas que vas a unir**: no siempre quieres quedarte con todos los datos de ambas tablas, por lo que habrá que elegir los datos a conservar de cada una.
-
-```Python
-left = df_pedidos[['id_cliente', 'pedido', 'descripcion']]
-right = df_cliente[['id_cliente', 'dirección', 'edad']]
-
-result = pd.merge(left, right, how='inner', on=['id_cliente'])
-```
-
-Describir cómo son los joins no es el objetivo de este notebook, pero te dejo [este enlace](https://realpython.com/pandas-merge-join-and-concat/) un buen artículo con varios ejemplos de joins.
-<details>
-<summary>Ver tipos de joins</summary>
-<img src="./img/joins.jpg" alt="drawing" width="500"/>
-</details>
-
-#### ¿Me vale esta muestra para entrenar al modelo?
-Es muy sencillo cuando tenemos un dataset cerrado, que viene de un concurso de Kaggle, pero en un caso real eso se cumple pocas veces. Hay muchas bases de datos en la empresa, por no hablar de todos los sitios externos (web scraping o APIs) de donde podemos sacar datos. ¿Cómo sabemos que tenemos los datos suficientes para montar un modelo? Si vamos a obtener nuevos, ¿a qué fuentes acudo? ¿cómo es la calidad de estos datos?
-
-1. **Volumen**: Lo primero, necesitamos un buen volumen de datos. Menos de mil observaciones suele ser escaso para entrenar y testar un modelo de machine learning.
-2. **Calidad**: la calidad de los datos siempre que mejor que cantidad. Es mejor encontrar unas pocas features predictivas, cuyos datos sean fiables, que una gran cantidad de features que no aporten nada al modelo. Asegúrate de que los datos conseguidos son buenos y no están manipulados, ni modificados por otros integrantes de la empresa. Y de ser así, si vas a utilizarlos piensa que cuando realices predicciones, las entradas de tu modelo tendrán que ser esos mismos datos modificados. 
-
-3. **Caso de uso**: piensa en el problema de negocio y planteate qué variables podrían ser predictivas, y si es factible conseguir esos datos.
-4. **Población**: asegúrante de que la población/muestra utilizada para entrenar se asemeje a la población con la que harás predicciones. Por ejemplo, si creas un modelo de tratamiento de imágenes, con el que predigas si unos pulmones tienen cáncer o no, tu modelo no tendrá un buen performance si lo entrenas con muestras de pulmones asiáticos y pretendes predecir muestras de pulmones caucásicos. O si entrenas solo con pulmones de mujeres e intentas predecir sobre pulmones de hombres.
-5. **Fuentes externas**: si tienes tiempo planteate acudir a fuentes externas a la empresa, mediante APIs, datasets de kaggle, páginas del gobierno... Por otro lado, no incluyas datos en el entrenamiento que luego no vayas a conseguir para las predicciones. Por ejemplo, si consigues una muestra concreta de datos que publicó una empresa, y ya no se van a publicar más, cuando vayas a hacer predicciones, no vas a poder contar con esos datos. Por último, piensa también que cuantas más fuentes externas, más dependencias tendrá tu modelo para realizar las predicciones y quizá no sea sencillo conseguir ese dato.
-
-6. **Crea tus propios datos**: ¿no tienes datos? "*invéntatelos*". Si necesitas crear un software de reconocimiento de imágenes para saber si alguien lleva gafas o no, saca fotos de amigos o familiares y utilizalas para el modelo. Otra opción es realizar encuestas.
-
 
 
 
