@@ -4,9 +4,7 @@ from sklearn.preprocessing import LabelEncoder
 import numpy as np
 
 # Ruta del archivo CSV en el directorio 'data/raw'
-# csv_path = os.path.join('..', 'data', 'raw', 'heart_2020_cleaned.csv') 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-# root_dir = os.path.abspath(os.path.join(current_dir, '..'))
 input_file = os.path.join(current_dir, '..', 'data', 'raw', 'heart_2020_cleaned.csv')
 
 
@@ -133,8 +131,14 @@ category_mapping_sleep = {
 }
 df['SleepGroup_Ordinal'] = df['SleepGroup'].map(category_mapping_sleep)
 
-# Eliminamos las columnas que son de tipo object y algunas de tipo float
-df = df.drop(columns=(["AgeCategory", "SleepTime", "SleepGroup", "GenHealth","BMI_Category","GrupoSalud","GrupoSalud_Mental", "Race", "Diabetic", "PhysicalHealth", "BMI","MentalHealth"]))
+# Eliminamos las columnas que no vamos a utilizar
+columns_drop = ["PhysicalActivity","AlcoholDrinking", "GenHealth_encoded",
+                   "Race_encoded","Asthma", "SkinCancer", "KidneyDisease", 
+                   "AgeCategory", "SleepTime", "SleepGroup", "GenHealth","BMI_Category","GrupoSalud","GrupoSalud_Mental", "Race", "Diabetic", "PhysicalHealth", "BMI","MentalHealth"]
+
+df = df.drop(columns=columns_drop)
+
+
 
 # Obtención de la ruta completa del directorio 'data/processing' 
 current_dir = os.path.dirname(os.path.abspath(__file__))
