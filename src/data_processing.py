@@ -134,11 +134,9 @@ df['SleepGroup_Ordinal'] = df['SleepGroup'].map(category_mapping_sleep)
 # Eliminamos las columnas que no vamos a utilizar
 columns_drop = ["PhysicalActivity","AlcoholDrinking", "GenHealth_encoded",
                    "Race_encoded","Asthma", "SkinCancer", "KidneyDisease", 
-                   "AgeCategory", "SleepTime", "SleepGroup", "GenHealth","BMI_Category","GrupoSalud","GrupoSalud_Mental", "Race", "Diabetic", "PhysicalHealth", "BMI","MentalHealth"]
+                   "AgeCategory", "SleepTime", "SleepGroup", "GenHealth","BMI_Category","GrupoSalud","GrupoSalud_Mental", "Race", "Diabetic", "PhysicalHealth", "BMI","MentalHealth", "SleepGroup_Ordinal", "GrupoSalud_Mental_Ordinal","BMI_Category_Ordinal",]
 
 df = df.drop(columns=columns_drop)
-
-
 
 # Obtención de la ruta completa del directorio 'data/processing' 
 current_dir = os.path.dirname(os.path.abspath(__file__))

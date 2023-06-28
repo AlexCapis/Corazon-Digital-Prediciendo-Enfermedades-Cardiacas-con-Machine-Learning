@@ -1,7 +1,7 @@
-a id="init"></a>
+</a>
 <h1>Corazón Digital: Prediciendo Enfermedades Cardíacas con Machine Learning</h1>
 
-#### Autor: [Alex Marzá Manuel](Poner link)
+#### Autor: [Alex Marzá Manuel](Poner link Linkedin)
 
 En el README de este proyecto se abordará la aplicación del machine learning para predecir enfermedades cardíacas, brindando una descripción detallada del trabajo realizado. En él, se proporcionará información sobre el contexto y la importancia de este problema de salud pública, destacando la necesidad de herramientas predictivas para el diagnóstico temprano.
 
@@ -9,74 +9,25 @@ En el README de este proyecto se abordará la aplicación del machine learning p
 <dl>
   <dt><a href="#introducción">1. Introducción </a></dt>
       <dd>Descripción detallada del problema y objetivo a tratar</dd>
-    
-  <dt><a href="#estructura">2. Estructura de carpetas</a></dt>
+
+  <dt><a href="#data_compr">2. Desarrollo</a></dt>
+      <dd>Cómo se tratan los datos</dd>
+
+  <dt><a href="#estructura">3. Estructura de carpetas</a></dt>
       <dd>Organización del proyecto</dd>
     
-  <dt><a href="#split_train_test">3. </a></dt>
-      <dd>Guardamos los datos de test desde el principio</dd>
+  <dt><a href="#construccion">4. En formación </a></dt>
+      <dd>El futuro del proyecto</dd>
     
-  <dt><a href="#target">4. Target</a></dt>
-      <dd>Distribución del target. ¿Desbalanceado?</dd>
-    
-  <dt><a href="#data_compr">5. Comprensión de variables</a></dt>
-      <dd>Cómo son tus features</dd>
-    
-  <dt><a href="#feat_red_prelim">6. Feat. Red. Preliminar</a></dt>
-      <dd>Reducción de features antes de empezar la analítica</dd>
 
-  <dt><a href="#univariant">7. Análisis univariante</a></dt>  
-      <dd>Primeras impresiones de las variables. Distribuciones</dd>
     
-  <dt><a href="#bivariant">8. Análisis bivariante</a></dt>
-      <dd>Búsqueda de relaciones entre las variables</dd>
-  
-  <dt><a href="#del_features">9. Eliminación de features</a></dt>
-      <dd>Features con muchos missings o alto grado de cardinalidad</dd>
-    
-  <dt><a href="#duplicates">10. Duplicados</a></dt>
-      <dd>Comprobamos si el DataFrame tiene duplicados</dd>
-    
-  <dt><a href="#missings">11. Missings</a></dt>
-      <dd>Tratamos los missings</dd>
-    
-  <dt><a href="#errors">12. Anomalías y errores</a></dt>
-      <dd>Detección de datos incoherentes</dd>
-    
-  <dt><a href="#outliers">13. Outliers</a></dt>
-      <dd>Tratamos los outliers</dd>
-    
-  <dt><a href="#feat_engi">14. Feature Engineering</a></dt>
-      <dd>14.1 Transformaciones</dd>
-      <dd>14.2 Encodings</dd>
-      <dd>14.3 Nuevas Features</dd>
-      <dd>14.4 Escalados</dd>
-    
-  <dt><a href="#feat_reduc">15. Feature Reduction</a></dt>
-      <dd>Filtrado de features por importancia</dd>
-    
-  <dt><a href="#choose_metric">16. Escoger métrica del modelo</a></dt>
-      <dd>16.1 Métricas de clasificación</dd>
-      <dd>16.2 Métricas de regresión</dd>
-    
-  <dt><a href="#choose_models">17. Decidir qué modelos</a></dt>
-      <dd>Factores que influyen en esta decisión</dd>
-    
-  <dt><a href="#hyperparmeters">18. Elegir hiperparámetros</a></dt>
-      <dd>Según el volumen de datos y sus tipos</dd>
-    
-  <dt><a href="#pipelines">19. Definimos pipelines y probamos</a></dt>
-      <dd>Dependerá de cada modelo. Ejecutamos</dd>
-    
-  <dt><a href="#results">20. Resultados</a></dt>
-      <dd>Comprobamos si el error se ajusta al problema</dd>
-    
-</dl>
+
 
 
 <a id="carga_datos"></a>
 <a href="#init"><p style="text-align:right;" href="#init">Volver al índice</p></a> 
-# 1. íntroducción
+
+# 1. Introducción
 
 #### Descripción del proyecto
 Este proyecto se centra en la detección temprana y prevención de enfermedades cardíacas, que son una de las principales causas de muerte en los Estados Unidos. A través del análisis de factores de riesgo clave como presión arterial alta, colesterol elevado, tabaquismo, estado diabético, obesidad y falta de actividad física, se busca desarrollar un modelo de aprendizaje automático capaz de predecir la condición cardíaca de los individuos. 
@@ -101,7 +52,7 @@ A continuación, se muestra una breve descripción con el significado de cada va
 
 **AlcoholDrinking**: Bebedores frecuentes (hombres adultos que toman más de 14 tragos p/semana y mujeres adultas que toman más de 7 tragos p/semana)
 
-**Stroke**: (Alguna vez le dijeron) (usted tuvo) un accidente cerebrovascular?
+**Stroke**: ¿Alguna vez le dijeron usted tuvo un accidente cerebrovascular?
 
 **PhysicalHealth**: Su salud física, incluye enfermedades y lesiones físicas, ¿cuántos días durante los últimos 30 días su salud física no fue buena?
 
@@ -115,7 +66,7 @@ A continuación, se muestra una breve descripción con el significado de cada va
 
 **Race**: Valor de raza/etnicidad imputado.
 
-**Diabetic**: (Alguna vez le dijeron) (usted tenía) diabetes?
+**Diabetic**: ¿Alguna vez le dijeron usted tenía diabetes?
 
 **PhysicalActivity**: Adultos que informaron haber realizado actividad física o ejercicio durante los últimos 30 días además de su trabajo habitual.
 
@@ -123,72 +74,133 @@ A continuación, se muestra una breve descripción con el significado de cada va
 
 **SleepTime**: en promedio, ¿cuántas horas duermes en un período de 24 horas?
 
-**Asthma**: (Alguna vez le dijeron) (usted tenía) asma?
+**Asthma**: ¿Alguna vez le dijeron usted tenía asma?
 
 **KidneyDisease**: sin incluir cálculos renales, infección de la vejiga o incontinencia, ¿alguna vez le dijeron que tenía una enfermedad renal?
 
-**SkinCancer**: (Alguna vez le dijeron) (usted tenía) cáncer de piel?
+**SkinCancer**: ¿Alguna vez le dijeron si usted tenía cáncer de piel?
     
 </p>
 </details>
+
+# 2. Desarrollo
 
 #### ¿Qué dificultades podemos encontrar?
 
 
 - **Calidad y limpieza de los datos**: Los conjuntos de datos clínicos pueden contener errores y valores faltantes. Se requiere un análisis exhaustivo y técnicas de limpieza para asegurar datos de calidad.
+    <details>
+    <summary>Comprobación de datos faltantes por columnas</summary>
+    <p>
+    df.isnull().sum()
+
+    </p>
+    </details>
 
 - **Selección de características relevantes**: Con múltiples variables disponibles, es importante determinar qué características son más relevantes para predecir enfermedades cardíacas. Se necesita un análisis exploratorio y técnicas de selección de características.
+    <details>
+    <summary>De la columna de "Sex"</summary>
+    <p>
+    Python
+
+    df["Sex"][df["Sex"] == "Female"] = 0
+
+    df["Sex"][df["Sex"] == "Male"] = 1
+
+    </p>
+    </details>
 
 - **Desequilibrio de clases**: Puede haber una proporción desigual entre casos positivos y negativos de enfermedad cardíaca. Esto puede afectar el rendimiento del modelo y requerir técnicas de muestreo o ajuste de pesos.
+
     <details>
     <summary>Ver imagen</summary>
-    <img src="./img/encoding.png" alt="drawing" width="400"/>
+    <img src="./docs/imagenes/pie_plot.png" alt="drawing" width="400"/>
     </details>
-    - Usar la librería [`chardet`]().
+
+    <details>
+    <summary>Técnica de desbalanceo de datos</summary>
+    <p>
+    BalancedBaggingClassifier(base_estimator=DecisionTreeClassifier(),
+                                    sampling_strategy='auto',
+                                    replacement=True,
+                                    random_state=0,)
+
+    </p>
+    </details>
 
 - **Elección del modelo adecuado**: Se debe seleccionar y ajustar cuidadosamente el modelo de aprendizaje automático más adecuado para el problema. Requiere experimentación y comparación de modelos para encontrar el más efectivo.
+    <details>
+    <summary>Modelo de Random Forest Classifier</summary>
+    <p>
+
+    Creamos el pipeline con Random Forest Classifier
+    pipeline = Pipeline([
+        ('rfc', RandomForestClassifier(random_state=0))
+    ])
+
+    Definimos los parámetros a probar en el RandomizedSearchCV
+    parameters = {
+        'rfc__n_estimators': [50, 80, 100],
+        'rfc__max_depth': [5, 8, 10],
+        'rfc__min_samples_split': [2, 5, 10],
+        'rfc__min_samples_leaf': [1, 2, 4],
+        'rfc__class_weight': ['balanced', None]
+    }
+
+    </p>
+    </details>
 
 - **Interpretación de resultados**: Comprender y comunicar los resultados del modelo de manera efectiva puede ser un desafío. Se necesita interpretar los hallazgos y explicar las predicciones de forma comprensible para diferentes audiencias.
+    <details>
+    <summary>Explicación métricas</summary>
+    <p>
+    En el problema que se está tratando de resolver, el objetivo principal es lograr una alta recall, ya que indica la capacidad del modelo para identificar correctamente la mayoría de los casos positivos. Esto es especialmente importante en la detección de enfermedades cardíacas, donde es fundamental identificar adecuadamente a los pacientes que realmente padecen dicha enfermedad.
 
+    </p>
+    </details>
 
-
-
-
-
-
-
-
-
-
-
+# 3. Estructura de carpetas
 
 A continuación se detallan las carpetas y los requisitos de cada una:
 
-1. **data**: se almacenarán los datos utilizados en el proyecto. Se deben crear las siguientes subcarpetas:
-   - `raw`: Contiene los datos en su formato original, sin procesar.
-   - `processed`: Almacena los datos procesados después de realizar las transformaciones necesarias.
+1. **data**: Contiene los datos utilizados en el proyecto. Se compone de las siguientes subcarpetas:
+   - `raw`: Contiene los datos en su formato original, es decir, se encuentran sin procesar.
+   - `processed`: Almacena los datos procesados después de realizar todas las transformaciones necesarias.
    - `train`: Contiene los datos de entrenamiento utilizados para entrenar el modelo.
    - `test`: Almacena los datos de prueba utilizados para evaluar el modelo.
 
-2. **notebooks**: se encuentran los archivos Jupyter Notebook que contienen el desarrollo del proyecto. Se deben nombrar y numerar adecuadamente según el orden de ejecución.
-   - `01_EDA.ipynb`: análisis exploratorio de datos.
-   - `02_Preprocesamiento.ipynb`: transformaciones y limpiezas, incluyendo el feature engineering.
-   - `03_Entrenamiento_Modelo.ipynb`: entrenamiento de modelos (mínimo 5 modelos supervisados diferentes y al menos 1 no supervisado) junto con su hiperparametrización.
-   - `04_Evaluacion_Modelo.ipynb`: evaluación de los modelos (métricas de evaluación, interpretación de variables,...).
-3. **src**: contiene los archivos fuente de Python que implementan las funcionalidades clave del proyecto. Los requisitos de los archivos son los siguientes:
-   - `data_processing.py`: código para procesar los datos de la carpeta `data/raw` y guardar los datos procesados en la carpeta `data/processed`.
-   - `model.py`: código para entrenar y guardar el modelo entrenado con el input de los datos de la carpeta `data/processed` y guardados los datasets de `data/train` y `data/test` utilizados en el entrenamiento.
-   - `evaluation.py`: código para evaluar el modelo utilizando los datos de prueba de la carpeta `data/test` y generar métricas de evaluación.
+2. **notebooks**: Se encuentran los archivos Jupyter Notebook que contienen los distintos desarrollos del proyecto. Estan estructurados de la siguiente manera.
+   - `01_EDA.ipynb`: Contiene el análisis exploratorio de datos.
+   - `02_Preprocesamiento.ipynb`: En él se desarrollan las transformaciones y limpiezas, incluyendo el feature engineering.
+   - `03_Entrenamiento_Modelo.ipynb`: Se plasma el entrenamiento de los modelos junto con su hiperparametrización correspondiente.
+   - `04_Evaluacion_Modelo.ipynb`: Contiene la evaluación de los modelos, es decir, las métricas de evaluación, interpretación de variables, etc.
 
-4. **models**: se almacenarán los archivos relacionados con el modelo entrenado. Los requisitos son los siguientes:
-   - `trained_model.pkl`: modelo entrenado guardado en formato pickle.
-   - `model_config.yaml`: archivo con la configuración del modelo (parámetros)
+3. **src**: En él se almacenan los distintos archivos fuente de Python que implementan las funcionalidades clave del proyecto. Se estructura de la siguiente manera:
+   - `data_processing.py`: Se trata del código para procesar los datos de la carpeta `data/raw` y guardar los datos procesados en la carpeta `data/processed`.
+   - `model.py`: Se plasma el código para entrenar y guardar el modelo entrenado utilizando los datos de la carpeta `data/train`.
+   - `evaluation.py`: Se muestra el código para evaluar el modelo utilizando los datos de prueba de la carpeta `data/test` y generar métricas de evaluación.
 
-5. **app**: contendrá los archivos necesarios para el despliegue del modelo en Streamlit u otra plataforma similar. Los requisitos son los siguientes:
+4. **models**: En esta carpeta se almacenarán los archivos relacionados con el modelo entrenado. Dicha carpeta estará compuesta por:
+   - `trained_model.pkl`: Se trata del modelo entrenado guardado en formato pickle.
+   - `model_config.yaml`: Es el archivo con la configuración del modelo entrenado, es decir, sus parámetros.
 
-   - `app.py`: código para la aplicación web que utiliza el modelo entrenado (Streamlit,...).
-   - `requirements.txt`: especifica las dependencias del proyecto para poder ejecutar la aplicación.
+5. **app**: En dicha carpeta se mostrarán los archivos necesarios para el despliegue del modelo en Streamlit y estará compuesta por:
 
-5. **docs**: contendrá la documentación adicional relacionada con el proyecto, como las dos presentaciones u otros documentos relevantes.
-    - `images`: 
-    -- `presentacion.pptx`
+   - `app.py`: Se plasma el ódigo para la aplicación web que utiliza el modelo entrenado (Streamlit,...).
+   - `requirements.txt`: En él se especifica las dependencias del proyecto para poder ejecutar la aplicación.
+
+5. **docs**: Contiene la documentación adicional relacionada con el proyecto. Esta compuesta por:
+   - `imagenes`: Se muestran las diversas imágenes utilizadas para el proyecto
+   - `presentación.pptx`: Se trata del archivo de la presentación a negocio.
+
+# 4. En formación
+
+El presente proyecto de Machine Learning se encuentra en una fase temprana de desarrollo, en la cual se han realizado importantes avances. Se ha llevado a cabo la limpieza y análisis de datos, así como la evaluación de diferentes modelos para la predicción de enfermedades cardíacas (Heart Disease).
+
+Hasta el momento, hemos logrado desarrollar scripts de Python que han permitido realizar el preprocesamiento de los datos, explorar y analizar la información relevante, y evaluar distintos modelos de Machine Learning. Estos avances nos han brindado una sólida base para continuar con el desarrollo del proyecto.
+
+Sin embargo, es importante destacar que aún queda un extenso camino por recorrer. Planeamos realizar mejoras continuas en el preprocesamiento de datos, incluyendo técnicas adicionales de feature engineering y selección de características relevantes. Asimismo, nos enfocaremos en la optimización de los modelos y la exploración de nuevas técnicas de Machine Learning que puedan mejorar la precisión de la predicción de enfermedades cardíacas.
+
+Además, se llevará a cabo un análisis exhaustivo de los resultados obtenidos hasta el momento, con el fin de identificar posibles sesgos, limitaciones y áreas de mejora. Este análisis nos permitirá realizar ajustes pertinentes en el enfoque metodológico y en la selección de características relevantes para mejorar la capacidad de predicción del modelo.
+
+En resumen, aunque hemos realizado importantes progresos en este proyecto de Machine Learning para la predicción de enfermedades cardíacas, reconocemos que aún hay mucho trabajo por hacer. Nos comprometemos a continuar evaluando, analizando y mejorando el modelo, con el objetivo de desarrollar una herramienta precisa y confiable que pueda ayudar en la detección temprana y prevención de enfermedades cardíacas.

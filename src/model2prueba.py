@@ -36,6 +36,7 @@ input_file = os.path.join(current_dir, '..', 'data', 'processed', 'processed_hea
 
 # Lecura del archivo CSV en un DataFrame
 df = pd.read_csv(input_file)
+print(len(df.columns))
 
 # Definimos nuestras etiquetas y features
 y = df['HeartDisease']
@@ -45,9 +46,12 @@ X = df.drop('HeartDisease', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=42)
 
 # Obtenemos la ruta completa del directorio 'data/processing' 
-current_dir_test = os.path.dirname(os.path.abspath(__file__))
-test_dir = os.path.join(current_dir_test, '..', 'data', 'test')
-    
+current_dir = os.getcwd()
+print(current_dir)
+
+test_dir = os.path.join(current_dir, 'PROYECTO-MACHINE-LEARNING/data/test')
+print(test_dir)
+
 # Creamos el directorio 'data/raw' si no existe
 if not os.path.exists(test_dir):
     os.makedirs(test_dir)
@@ -58,8 +62,7 @@ test_data = pd.concat([X_test, y_test], axis=1) # DUDAS DE QUE ES LO QUE TENGO Q
 test_data.to_csv(test_file, index=False)
 
 # Obtenemos de la ruta completa del directorio 'data/processing' 
-current_dir_train = os.path.dirname(os.path.abspath(__file__))
-train_dir = os.path.join(current_dir_train, '..', 'data', 'train')
+train_dir = os.path.join(current_dir, 'PROYECTO-MACHINE-LEARNING/data/train')
     
 # Creamos el directorio 'data/train' si no existe
 if not os.path.exists(train_dir):
@@ -67,7 +70,7 @@ if not os.path.exists(train_dir):
 
  # Guardamos el conjunto de prueba en archivo CSV
 train_file = os.path.join(train_dir, 'train.csv')
-train_data = pd.concat([X_train, X_test], axis=1) # DUDAS DE QUE ES LO QUE TENGO QUE CONCATENAR
+train_data = pd.concat([X_train, y_train], axis=1) 
 train_data.to_csv(train_file, index=False)
 
 # Obtenemos de la ruta completa del directorio 'data/test' 

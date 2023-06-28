@@ -1,0 +1,22 @@
+# Guardamos los parametros de nuestro modelo ganador de Random Forest
+# Usamos la nomenclatura de clave-valor para este tipo de docuemntos
+parameters:
+  rfc__n_estimators:
+    - 50
+    - 80
+    - 100
+  rfc__max_depth:
+    - 5
+    - 8
+    - 10
+  rfc__min_samples_split:
+    - 2
+    - 5
+    - 10
+  rfc__min_samples_leaf:
+    - 1
+    - 2
+    - 4
+  rfc__class_weight:
+    - balanced
+    - null
