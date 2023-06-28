@@ -1,69 +1,159 @@
-import os
+# Tratamiento de datos
+import numpy as np
 import pandas as pd
+
+# Gráficos
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# Modelado de datos
+from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
+
+# ímportamos el modelo
+from sklearn.ensemble import RandomForestClassifier
+
+
+# Optimización del Modelo
+from sklearn.pipeline import Pipeline
+from sklearn.feature_selection import SelectKBest
+from sklearn.model_selection import RandomizedSearchCV
+
+# Para guardar los modelos
 import pickle
+import os
 
-def train_linear_regression_model():
-    # Directorio actual
-    current_dir = os.getcwd()
+# Configuración warnings
+import warnings
+warnings.filterwarnings('ignore')
 
-    # Directorio del archivo procesado
-    file_path = os.path.join(current_dir, '..', 'data', 'processed', 'processed.csv')
-    df = pd.read_csv(file_path)
 
-    # Eliminación de filas con valores faltantes en las características y la variable objetivo
-    df.dropna(subset=['SMA 15', 'SMA 60', 'MSD 10', 'MSD 30', 'rsi', 'returns'], inplace=True)
+# Ruta del archivo CSV en el directorio 'data/processed'
+current_dir = os.path.dirname(os.path.abspath(__file__))
+input_file = os.path.join(current_dir, '..', 'data', 'processed', 'processed_heart.csv')
 
-    # Columnas de características (features)
-    features = df[['SMA 15', 'SMA 60', 'MSD 10', 'MSD 30', 'rsi']]
+# Lecura del archivo CSV en un DataFrame
+df = pd.read_csv(input_file)
 
-    # Variable objetivo (target)
-    target = df['returns']
+# Definimos nuestras etiquetas y features
+y = df['HeartDisease']
+X = df.drop('HeartDisease', axis=1)
 
-    # División en conjuntos de entrenamiento y prueba
-    X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=42)
+# Dividimos en sets de entrenamiento y test
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=42)
 
-    # Directorios de salida
-    train_dir = os.path.join(current_dir, '..', 'data', 'train')
-    test_dir = os.path.join(current_dir, '..', 'data', 'test')
 
-    # Creación directorios de salida si no existen
-    os.makedirs(train_dir, exist_ok=True)
-    os.makedirs(test_dir, exist_ok=True)
+# Creamos el pipeline con Random Forest Classifier
+pipeline = Pipeline([
+    ('rfc', RandomForestClassifier(random_state=0))
+])
 
-    # Guardado del conjunto de entrenamiento en archivo CSV
-    train_file = os.path.join(train_dir, 'train.csv')
-    train_data = pd.concat([X_train, y_train], axis=1)
-    train_data.to_csv(train_file, index=False)
+# Definimos los parámetros a probar en el RandomizedSearchCV
+parameters = {
+    'rfc__n_estimators': [50, 80, 100],
+    'rfc__max_depth': [5, 8, 10],
+    'rfc__min_samples_split': [2, 5, 10],
+    'rfc__min_samples_leaf': [1, 2, 4],
+    'rfc__class_weight': ['balanced', None]
+}
 
-    # Guardar conjunto de prueba en archivo CSV
-    test_file = os.path.join(test_dir, 'test.csv')
-    test_data = pd.concat([X_test, y_test], axis=1)
+# Realizamos la búsqueda aleatoria de hiperparámetros utilizando RandomizedSearchCV
+random_search = RandomizedSearchCV(pipeline, parameters, cv=5, scoring='recall', random_state=0)
+random_search.fit(X_train, y_train)
+
+# Obtenemos las mejores configuraciones de hiperparámetros encontradas
+best_params_RandomForest = random_search.best_params_
+
+# Obtenemos las predicciones del mejor modelo encontrado
+y_pred_RandomForest = random_search.predict(X_test)
+
+# Obtenemos la ruta completa del directorio 'models' dentro del proyecto
+models_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'models')
+
+# Guardamos las predicciones del modelo en un archivo pickle dentro de 'models'
+predictions_file = os.path.join(models_dir, 'trained_model_RandomForest.pkl')
+with open(predictions_file, 'wb') as file:
+    pickle.dump(y_pred_RandomForest, file)
+
+
+
+
+
+
+
+
+# Obtenemos la ruta completa del directorio 'data/processing' 
+current_dir_test = os.path.dirname(os.path.abspath(__file__))
+test_dir = os.path.join(current_dir_test, '..', 'data', 'test')
+    
+# Creamos el directorio 'data/raw' si no existe
+if not os.path.exists(test_dir):
+    os.makedirs(test_dir)
+
+ # Guardamos conjunto de prueba en archivo CSV
+test_file = os.path.join(test_dir, 'test.csv')
+test_data = pd.concat([X_test, y_test], axis=1)
+test_data.to_csv(test_file, index=False)
+
+# Obtenemos de la ruta completa del directorio 'data/processing' 
+current_dir_train = os.path.dirname(os.path.abspath(__file__))
+train_dir = os.path.join(current_dir_train, '..', 'data', 'train')
+    
+# Creamos el directorio 'data/train' si no existe
+if not os.path.exists(train_dir):
+    os.makedirs(train_dir)
+
+ # Guardamos el conjunto de prueba en archivo CSV
+train_file = os.path.join(train_dir, 'train.csv')
+train_data = pd.concat([X_train, X_test], axis=1) # DUDAS DE QUE ES LO QUE TENGO QUE CONCATENAR
+train_data.to_csv(train_file, index=False)
+
+# Obtenemos de la ruta completa del directorio 'data/test' 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+processed_dir = os.path.join(current_dir, '..', 'data', 'processed')
+    
+# Creamos del directorio 'data/test' si no existe
+if not os.path.exists(processed_dir):
+    os.makedirs(processed_dir)
+    
+# Guardamos el DataFrame como un archivo CSV en 'data/raw'
+filename = "processed_heart.csv"
+filepath = os.path.join(processed_dir, filename)
+df.to_csv(filepath, index=False)
+
+
+# Obtenemos la ruta completa del directorio 'data/train' 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+processed_dir = os.path.join(current_dir, '..', 'data', 'processed')
+    
+# Creamos el directorio 'data/train' si no existe
+if not os.path.exists(processed_dir):
+    os.makedirs(processed_dir)
+    
+# Guardamos del DataFrame como un archivo CSV en 'data/train'
+filename = "processed_heart.csv"
+filepath = os.path.join(processed_dir, filename)
+df.to_csv(filepath, index=False)
+
+
+
+
+
+
+
+# Verificamos si el archivo de prueba ya existe
+if os.path.exists(test_file):
+    print("El archivo de prueba ya existe. No se sobrescribirá.")
+else:
+    # Guardamos conjunto de prueba en archivo CSV
     test_data.to_csv(test_file, index=False)
+    print("El archivo de prueba se ha guardado exitosamente.")
 
-    # La regresión lineal
-    reg = LinearRegression()
-    reg.fit(X_train, y_train)
-
-    # Predicciones en el conjunto de prueba
-    y_pred = reg.predict(X_test)
-
-    # Calculo del MSE en el conjunto de prueba
-    mse = mean_squared_error(y_test, y_pred)
-    mse_percentage = mse * 100
-    print(f"MSE (porcentaje): {mse_percentage}")
-
-    # Directorio del archivo de modelos
-    models_dir = os.path.join(current_dir, '..', 'models')
-
-    # Creación el directorio "models" si no existe
-    os.makedirs(models_dir, exist_ok=True)
-
-    # Guardado las predicciones en formato pickle
-    predictions_path = os.path.join(models_dir, 'trained_model.pkl')
-    with open(predictions_path, 'wb') as file:
-        pickle.dump(y_pred, file)
-
-train_linear_regression_model()
+# Verificamos si el archivo de entrenamiento ya existe
+if os.path.exists(train_file):
+    print("El archivo de entrenamiento ya existe. No se sobrescribirá.")
+else:
+    # Guardamos conjunto de entrenamiento en archivo CSV
+    train_data.to_csv(train_file, index=False)
+    print("El archivo de entrenamiento se ha guardado exitosamente.")
