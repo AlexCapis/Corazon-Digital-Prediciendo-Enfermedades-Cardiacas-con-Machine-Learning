@@ -37,7 +37,10 @@ input_file = os.path.join(current_dir, '..', 'data', 'processed', 'processed_hea
 
 # Lecura del archivo CSV en un DataFrame
 df = pd.read_csv(input_file)
-print(len(df.columns))
+
+columns_drop =["GrupoSalud_Mental_Ordinal", "SleepGroup_Ordinal", "BMI_Category_Ordinal"]
+
+df= df.drop(columns_drop, axis=1)
 
 # Definimos nuestras etiquetas y features
 y = df['HeartDisease']

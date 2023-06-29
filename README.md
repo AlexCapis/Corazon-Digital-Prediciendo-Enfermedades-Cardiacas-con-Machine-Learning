@@ -1,7 +1,7 @@
 </a>
 <h1>Corazón Digital: Prediciendo Enfermedades Cardíacas con Machine Learning</h1>
 
-#### Autor: [Alex Marzá Manuel](Poner link Linkedin)
+#### Autor: [Alex Marzá Manuel](https://www.linkedin.com/in/alex-marza-a40197280/)
 
 En el README de este proyecto se abordará la aplicación del machine learning para predecir enfermedades cardíacas, brindando una descripción detallada del trabajo realizado. En él, se proporcionará información sobre el contexto y la importancia de este problema de salud pública, destacando la necesidad de herramientas predictivas para el diagnóstico temprano.
 
@@ -19,13 +19,6 @@ En el README de este proyecto se abordará la aplicación del machine learning p
   <dt><a href="#construccion">4. En formación </a></dt>
       <dd>El futuro del proyecto</dd>
     
-
-    
-
-
-
-<a id="carga_datos"></a>
-<a href="#init"><p style="text-align:right;" href="#init">Volver al índice</p></a> 
 
 # 1. Introducción
 
