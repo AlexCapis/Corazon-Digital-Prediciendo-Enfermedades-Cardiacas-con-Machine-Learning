@@ -1,7 +1,5 @@
-import os
 import streamlit as st
 import pandas as pd
-import pickle
 
 
 # Ajustamos la pagina con un icono en el buscador y el titulo
@@ -188,10 +186,10 @@ elif menu == 'MODELOS':
             Indica la cantidad de casos negativos que fueron clasificados correctamente por el modelo.
 
         Falsos positivos (False Positives, FP): 
-            Muestra la cantidad de casos negativos que fueron incorrectamente clasificados como positivos por el modelo (errores de tipo I).
+            Muestra la cantidad de casos negativos que fueron incorrectamente clasificados como positivos por el modelo.
 
         Falsos negativos (False Negatives, FN): 
-            Representa la cantidad de casos positivos que fueron incorrectamente clasificados como negativos por el modelo (errores de tipo II).
+            Representa la cantidad de casos positivos que fueron incorrectamente clasificados como negativos por el modelo.
     '''
     st.write(texto_metricas)
 

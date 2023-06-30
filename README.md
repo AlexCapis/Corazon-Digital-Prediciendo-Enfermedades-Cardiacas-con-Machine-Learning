@@ -161,6 +161,7 @@ A continuación se detallan las carpetas y los requisitos de cada una:
    - `processed`: Almacena los datos procesados después de realizar todas las transformaciones necesarias.
    - `train`: Contiene los datos de entrenamiento utilizados para entrenar el modelo.
    - `test`: Almacena los datos de prueba utilizados para evaluar el modelo.
+   - `comparation_models_metrics`: Contiene los datos de las métricas de cada modulo para poder observar mejor sus respectivas diferencias.
 
 2. **notebooks**: Se encuentran los archivos Jupyter Notebook que contienen los distintos desarrollos del proyecto. Estan estructurados de la siguiente manera.
    - `01_EDA.ipynb`: Contiene el análisis exploratorio de datos.
