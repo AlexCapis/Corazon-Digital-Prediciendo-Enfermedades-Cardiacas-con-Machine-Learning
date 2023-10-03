@@ -1,10 +1,17 @@
 </a>
-<h1>Corazón Digital: Prediciendo Enfermedades Cardíacas con Machine Learning</h1>
+<h1>❤️Corazón Digital-Prediciendo Enfermedades Cardíacas con Machine Learning 🤖</h1>
 
-#### Autor: [Alex Marzá Manuel](https://www.linkedin.com/in/alex-marza-a40197280/)
 
-En el README de este proyecto se abordará la aplicación del machine learning para predecir enfermedades cardíacas, brindando una descripción detallada del trabajo realizado. En él, se proporcionará información sobre el contexto y la importancia de este problema de salud pública, destacando la necesidad de herramientas predictivas para el diagnóstico temprano.
+![Portada](/docs/imagenes/cardiopatia.png)
 
+
+
+
+#### Autor: [Alex Marzá Manuel](https://www.linkedin.com/in/alex-marza-data-science/)
+
+Este proyecto se abordará la aplicación del machine learning para predecir enfermedades cardíacas, brindando una descripción detallada del trabajo realizado. En él, se proporcionará información sobre el contexto y la importancia de este problema de salud pública, destacando la necesidad de herramientas predictivas para el diagnóstico temprano.
+
+# Indice
 
 <dl>
   <dt><a href="#introducción">1. Introducción </a></dt>
@@ -19,8 +26,8 @@ En el README de este proyecto se abordará la aplicación del machine learning p
   <dt><a href="#construccion">4. En formación </a></dt>
       <dd>El futuro del proyecto</dd>
     
-
-# 1. Introducción
+---
+# 🚀 1. Introducción
 
 #### Descripción del proyecto
 Este proyecto se centra en la detección temprana y prevención de enfermedades cardíacas, que son una de las principales causas de muerte en los Estados Unidos. A través del análisis de factores de riesgo clave como presión arterial alta, colesterol elevado, tabaquismo, estado diabético, obesidad y falta de actividad física, se busca desarrollar un modelo de aprendizaje automático capaz de predecir la condición cardíaca de los individuos. 
@@ -76,7 +83,7 @@ A continuación, se muestra una breve descripción con el significado de cada va
 </p>
 </details>
 
-# 2. Desarrollo
+# 🔧 2. Desarrollo
 
 #### ¿Qué dificultades podemos encontrar?
 
@@ -152,7 +159,7 @@ A continuación, se muestra una breve descripción con el significado de cada va
     </p>
     </details>
 
-# 3. Estructura de carpetas
+# 📁 3. Estructura de carpetas
 
 A continuación se detallan las carpetas y los requisitos de cada una:
 
@@ -187,7 +194,7 @@ A continuación se detallan las carpetas y los requisitos de cada una:
    - `imagenes`: Se muestran las diversas imágenes utilizadas para el proyecto
    - `presentación.pptx`: Se trata del archivo de la presentación a negocio.
 
-# 4. En formación
+# 📈 4. En formación
 
 El presente proyecto de Machine Learning se encuentra en una fase temprana de desarrollo, en la cual se han realizado importantes avances. Se ha llevado a cabo la limpieza y análisis de datos, así como la evaluación de diferentes modelos para la predicción de enfermedades cardíacas (Heart Disease).
 
@@ -198,3 +205,16 @@ Sin embargo, es importante destacar que aún queda un extenso camino por recorre
 Además, se llevará a cabo un análisis exhaustivo de los resultados obtenidos hasta el momento, con el fin de identificar posibles sesgos, limitaciones y áreas de mejora. Este análisis nos permitirá realizar ajustes pertinentes en el enfoque metodológico y en la selección de características relevantes para mejorar la capacidad de predicción del modelo.
 
 En resumen, aunque hemos realizado importantes progresos en este proyecto de Machine Learning para la predicción de enfermedades cardíacas, reconocemos que aún hay mucho trabajo por hacer. Nos comprometemos a continuar evaluando, analizando y mejorando el modelo, con el objetivo de desarrollar una herramienta precisa y confiable que pueda ayudar en la detección temprana y prevención de enfermedades cardíacas.
+
+
+
+
+
+
+
+
+
+
+
+
+
