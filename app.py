@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 
 
 # Ajustamos la pagina con un icono en el buscador y el titulo
@@ -88,27 +87,7 @@ if menu == 'ORIGINAL':
         'KidneyDisease': '¿Alguna vez le dijeron que tenía una enfermedad renal excluyendo cálculos renales, infección de la vejiga o incontinencia?',
     }
 
-    # Obtener el texto mínimo (limitado a 50 caracteres) para cada columna
-    texto_minimo = {key: value.split(':')[0][:50] + '...' if len(value) > 50 else value for key, value in caracteristicas_descripciones.items()}
 
-    # Crear un gráfico de barras para mostrar características y descripciones
-    fig_caracteristicas = px.bar(
-        data_frame=pd.DataFrame(list(texto_minimo.items()), columns=['Característica', 'Descripción Mínima']),
-        x='Característica',
-        y='Descripción Mínima',
-        title='Descripción Mínima de Características',
-    )
-
-    # Mostrar el gráfico de barras
-    st.plotly_chart(fig_caracteristicas)
-
-
-
-    # Información adicional o análisis que desees agregar
-    st.write(
-        "Estas características proporcionan una visión general de los datos originales y son fundamentales "
-        "para nuestro proyecto. Explora el gráfico y descubre más sobre cada característica. ¿Te intrigó algo en particular? ¡Pregúntanos!"
-    )
 
 
 elif menu == 'INGENIERIA DE DATOS':
