@@ -12,7 +12,7 @@ imagen = "./docs/imagenes/cardiopatia.png"
 imagen_cargada = st.image(imagen, use_column_width=True)
 
 # Título de la aplicación
-st.title("🚀 Descubre tu Futuro Cardíaco: Prediciendo Salud desde el Corazón ❤️")
+st.title("🚀 Descubre tu Futuro Cardíaco - Prediciendo Salud desde el Corazón ❤️")
 
 # Introducción
 st.write(
@@ -67,25 +67,27 @@ if menu == 'ORIGINAL':
     st.subheader('🔍 Características de los Datos')
 
     # Descripciones de las características
-    caracteristicas_descripciones = {
-        'HeartDisease': 'Encuestados que informaron haber tenido una enfermedad cardíaca coronaria o un infarto de miocardio.',
-        'IMC': 'Índice de Masa Corporal (IMC).',
-        'Smoking': '¿Ha fumado al menos 100 cigarrillos en toda su vida? (Sí/No).',
-        'AlcoholDrinking': 'Bebedores frecuentes (hombres que toman más de 14 tragos p/semana y mujeres más de 7 tragos p/semana).',
-        'Stroke': '¿Alguna vez le dijeron que tuvo un accidente cerebrovascular?',
-        'PhysicalHealth': 'Número de días durante los últimos 30 días en los que su salud física no fue buena.',
-        'MentalHealth': 'Número de días durante los últimos 30 días en los que su salud mental no fue buena (0-30 días).',
-        'DiffWalking': '¿Tiene serias dificultades para caminar o subir escaleras?',
-        'Sex': 'Género (Hombre/Mujer).',
-        'AgeCategory': 'Categoría de edad en catorce niveles.',
-        'Race': 'Valor de raza/etnicidad imputado.',
-        'Diabetic': '¿Alguna vez le dijeron que tenía diabetes?',
-        'PhysicalActivity': 'Realizó actividad física o ejercicio durante los últimos 30 días además de su trabajo habitual (Sí/No).',
-        'GenHealth': 'En general, ¿diría usted que su salud es...?',
-        'SleepTime': 'Promedio de horas de sueño en un período de 24 horas.',
-        'Asthma': '¿Alguna vez le dijeron que tenía asma?',
-        'KidneyDisease': '¿Alguna vez le dijeron que tenía una enfermedad renal excluyendo cálculos renales, infección de la vejiga o incontinencia?',
-    }
+    st.markdown('''
+        - 'HeartDisease': 'Encuestados que informaron haber tenido una enfermedad cardíaca coronaria o un infarto de miocardio.',
+        - 'IMC': 'Índice de Masa Corporal (IMC).',
+        - 'Smoking': '¿Ha fumado al menos 100 cigarrillos en toda su vida? (Sí/No).',
+        - 'AlcoholDrinking': 'Bebedores frecuentes (hombres que toman más de 14 tragos p/semana y mujeres más de 7 tragos p/semana).',
+        - 'Stroke': '¿Alguna vez le dijeron que tuvo un accidente cerebrovascular?',
+        - 'PhysicalHealth': 'Número de días durante los últimos 30 días en los que su salud física no fue buena.',
+        - 'MentalHealth': 'Número de días durante los últimos 30 días en los que su salud mental no fue buena (0-30 días).',
+        - 'DiffWalking': '¿Tiene serias dificultades para caminar o subir escaleras?',
+        - 'Sex': 'Género (Hombre/Mujer).',
+        - 'AgeCategory': 'Categoría de edad en catorce niveles.',
+        - 'Race': 'Valor de raza/etnicidad imputado.',
+        - 'Diabetic': '¿Alguna vez le dijeron que tenía diabetes?',
+        - 'PhysicalActivity': 'Realizó actividad física o ejercicio durante los últimos 30 días además de su trabajo habitual (Sí/No).',
+        - 'GenHealth': 'En general, ¿diría usted que su salud es...?',
+        - 'SleepTime': 'Promedio de horas de sueño en un período de 24 horas.',
+        - 'Asthma': '¿Alguna vez le dijeron que tenía asma?',
+        - 'KidneyDisease': '¿Alguna vez le dijeron que tenía una enfermedad renal excluyendo cálculos renales, infección de la vejiga o incontinencia?',
+    '''
+                
+    )
 
 
 
